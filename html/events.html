@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - TGIS | Technology, Geospatial & Infrastructure Solutions</title>
+    <meta name="description" content="Join TGIS events including industry conferences, training workshops, networking sessions, and technical seminars. Register for upcoming events and view our event gallery.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/events-styles.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="loading-text">
+            <h2>TGIS</h2>
+            <p>Loading Events...</p>
+        </div>
+    </div>
+
+    <!-- Top Contact Bar -->
+    <div class="top-contact-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> +1 (555) 123-4567</span>
+                <span><i class="fas fa-envelope"></i> info@tgis.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> 123 Business Ave, Tech City, TC 12345</span>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="/placeholder.svg?height=50&width=120&text=TGIS+Logo" alt="TGIS Logo" class="logo">
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li class="dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="services.html" class="dropdown-link">All Services</a>
+                            <a href="survey-services.html" class="dropdown-link">Survey Services</a>
+                            <a href="it-services.html" class="dropdown-link">IT Solutions</a>
+                            <a href="real-estate-services.html" class="dropdown-link">Real Estate Services</a>
+                            <a href="machine-rental.html" class="dropdown-link">Machine Rental</a>
+                            <a href="agriculture-services.html" class="dropdown-link">Agriculture</a>
+                            <a href="civil-architecture-services.html" class="dropdown-link">Civil & Architecture</a>
+                            <a href="training-services.html" class="dropdown-link">Training & Certificate</a>
+                            <a href="blog.html" class="dropdown-link">Blog</a>
+                        </div>
+                    </li>
+                    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="events.html" class="nav-link active">Events</a></li>
+                    <li><a href="careers.html" class="nav-link">Careers</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="#contact" class="btn btn-primary nav-cta">Get Quote</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="events-hero">
+        <div class="hero-video">
+            <video autoplay muted loop playsinline>
+                <source src="1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up">
+                <h1 class="hero-title">TGIS Events</h1>
+                <p class="hero-subtitle">Join us for industry-leading conferences, workshops, and networking opportunities</p>
+                
+                <div class="hero-buttons">
+                    <a href="#upcoming-events" class="btn btn-primary btn-large">View Upcoming Events</a>
+                    <a href="#past-events" class="btn btn-secondary btn-large">Event Gallery</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Categories Filter -->
+    <section class="event-filters">
+        <div class="container">
+            <div class="filter-tabs" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="conference">Conferences</button>
+                <button class="filter-btn" data-filter="workshop">Workshops</button>
+                <button class="filter-btn" data-filter="seminar">Seminars</button>
+                <button class="filter-btn" data-filter="networking">Networking</button>
+                <button class="filter-btn" data-filter="training">Training</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section id="upcoming-events" class="upcoming-events">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Upcoming Events</h2>
+                <p class="section-subtitle">Don't miss out on our exciting upcoming events and opportunities to connect with industry leaders</p>
+            </div>
+
+            <div class="events-grid" id="upcoming-events-grid">
+                <!-- Event cards will be populated by JavaScript -->
+            </div>
+
+            <div class="text-center" data-aos="fade-up">
+                <button class="btn btn-secondary" id="load-more-upcoming">Load More Events</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Calendar -->
+    <section class="event-calendar-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Event Calendar</h2>
+                <p class="section-subtitle">View all events in our interactive calendar</p>
+            </div>
+            
+            <div class="calendar-container" data-aos="fade-up">
+                <div class="calendar-header">
+                    <button class="calendar-nav" id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                    <h3 class="calendar-title" id="calendar-title">January 2024</h3>
+                    <button class="calendar-nav" id="next-month"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Calendar will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Events Gallery -->
+    <section id="past-events" class="past-events">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Past Events Gallery</h2>
+                <p class="section-subtitle">Explore highlights from our previous successful events</p>
+            </div>
+
+            <div class="gallery-filters" data-aos="fade-up">
+                <button class="gallery-filter-btn active" data-year="all">All Years</button>
+                <button class="gallery-filter-btn" data-year="2024">2024</button>
+                <button class="gallery-filter-btn" data-year="2023">2023</button>
+                <button class="gallery-filter-btn" data-year="2022">2022</button>
+            </div>
+
+            <div class="gallery-grid" id="past-events-gallery">
+                <!-- Gallery items will be populated by JavaScript -->
+            </div>
+
+            <div class="text-center" data-aos="fade-up">
+                <button class="btn btn-secondary" id="load-more-gallery">Load More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Registration CTA -->
+    <section class="registration-cta">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h2 class="cta-title">Ready to Join Our Next Event?</h2>
+                <p class="cta-subtitle">Register now and be part of the future of technology and innovation</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-large" id="register-event-btn">Register for Event</button>
+                    <a href="#contact" class="btn btn-secondary btn-large">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content" data-aos="fade-up">
+                <div class="newsletter-text">
+                    <h3>Stay Updated on Events</h3>
+                    <p>Subscribe to our newsletter to receive notifications about upcoming events and exclusive invitations</p>
+                </div>
+                <form class="newsletter-form" id="newsletter-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/placeholder.svg?height=50&width=120&text=TGIS+Logo" alt="TGIS Logo" class="logo">
+                        <p>Leading provider of technology, geospatial, and infrastructure solutions for modern businesses.</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="survey-services.html">Survey Services</a></li>
+                        <li><a href="it-services.html">IT Solutions</a></li>
+                        <li><a href="real-estate-services.html">Real Estate Services</a></li>
+                        <li><a href="machine-rental.html">Equipment Rental</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Business Ave, Tech City, TC 12345</p>
+                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-envelope"></i> info@tgis.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 TGIS. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Event Details Modal -->
+    <div class="modal" id="event-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-event-title"></h3>
+                <button class="modal-close" id="close-event-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-event-body">
+                <!-- Event details will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal" id="registration-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Event Registration</h3>
+                <button class="modal-close" id="close-registration-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="registration-form" id="event-registration-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reg-first-name">First Name *</label>
+                            <input type="text" id="reg-first-name" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-last-name">Last Name *</label>
+                            <input type="text" id="reg-last-name" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reg-email">Email Address *</label>
+                            <input type="email" id="reg-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-phone">Phone Number</label>
+                            <input type="tel" id="reg-phone" name="phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-company">Company/Organization</label>
+                        <input type="text" id="reg-company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-position">Job Title</label>
+                        <input type="text" id="reg-position" name="position">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-event">Select Event *</label>
+                        <select id="reg-event" name="event" required>
+                            <option value="">Choose an event...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-dietary">Dietary Requirements</label>
+                        <textarea id="reg-dietary" name="dietary" rows="3" placeholder="Please specify any dietary requirements or allergies"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-comments">Additional Comments</label>
+                        <textarea id="reg-comments" name="comments" rows="4" placeholder="Any additional information or questions"></textarea>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="newsletter" id="reg-newsletter">
+                            <span class="checkmark"></span>
+                            Subscribe to our newsletter for event updates
+                        </label>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="terms" id="reg-terms" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" target="_blank">Terms and Conditions</a>
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-registration">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Register Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div class="modal" id="gallery-modal">
+        <div class="modal-content gallery-modal-content">
+            <button class="modal-close" id="close-gallery-modal">&times;</button>
+            <div class="gallery-modal-body">
+                <img id="gallery-modal-image" src="/placeholder.svg" alt="">
+                <div class="gallery-modal-info">
+                    <h3 id="gallery-modal-title"></h3>
+                    <p id="gallery-modal-description"></p>
+                </div>
+            </div>
+            <div class="gallery-modal-nav">
+                <button class="gallery-nav-btn" id="gallery-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="gallery-nav-btn" id="gallery-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="floating-action-btn" id="floating-btn">
+        <i class="fas fa-calendar-plus"></i>
+        <span class="fab-tooltip">Register for Event</span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Success Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span class="notification-message"></span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/events-script.js"></script>
+</body>
+</html>

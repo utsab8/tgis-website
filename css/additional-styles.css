@@ -1,0 +1,11 @@
+/* Prevent body scroll when mobile menu is open */
+body.nav-open {
+    overflow: hidden;
+}
+
+@media (max-width: 991px) {
+    body.nav-open {
+        position: fixed;
+        width: 100%;
+    }
+}

@@ -1,0 +1,32 @@
+.location-card.main-office .location-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.location-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.location-map {
+    flex: 1;
+    min-width: 400px;
+}
+
+.location-map .map-container {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .location-card.main-office .location-content {
+        flex-direction: column;
+    }
+    
+    .location-map {
+        min-width: 100%;
+    }
+}

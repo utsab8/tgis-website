@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Services - TGIS | Precision Farming & Agricultural Solutions</title>
+    <meta name="description" content="Advanced agricultural services including precision farming, crop monitoring, soil analysis, and agricultural mapping solutions for modern farming.">
+    <meta name="keywords" content="precision agriculture, crop monitoring, soil analysis, agricultural mapping, drone farming, smart farming, agricultural technology">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Agriculture Services - TGIS Professional Agricultural Solutions">
+    <meta property="og:description" content="Advanced precision farming, crop monitoring, and agricultural mapping solutions with cutting-edge technology for modern agriculture.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/agriculture-services-styles.css">
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-contact-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> +1 (555) 123-4567</span>
+                <span><i class="fas fa-envelope"></i> info@tgis.com</span>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <img src="/placeholder.svg?height=50&width=120&text=TGIS+Logo" alt="TGIS Logo" class="logo">
+                </a>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#services" class="nav-link active">Services <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="services.html" class="dropdown-link">All Services</a>
+                            <a href="survey-services.html" class="dropdown-link">Survey Services</a>
+                            <a href="it-services.html" class="dropdown-link">IT Solutions</a>
+                            <a href="real-estate-services.html" class="dropdown-link">Real Estate Services</a>
+                            <a href="machine-rental.html" class="dropdown-link">Machine Rental</a>
+                            <a href="agriculture-services.html" class="dropdown-link active">Agriculture</a>
+                            <a href="civil-architecture-services.html" class="dropdown-link">Civil & Architecture</a>
+                            <a href="training-services.html" class="dropdown-link">Training & Certificate</a>
+                            <a href="blog.html" class="dropdown-link">Blog</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="portfolio.html" class="nav-link">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="careers.html" class="nav-link">Careers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="events.html" class="nav-link">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                <a href="contact.html" class="btn btn-primary nav-cta">Get Quote</a>
+            </div>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-seedling"></i>
+            </div>
+            <div class="loading-text">Loading Agriculture Services...</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agriculture Header -->
+    <section class="agriculture-header" id="agriculture-header">
+        <div class="header-video-overlay"></div>
+        <div class="agriculture-animations">
+            <!-- Agricultural Drones -->
+            <div class="agriculture-drone" id="agriculture-drone-1">
+                <div class="drone-body"></div>
+                <div class="drone-propeller drone-propeller-1"></div>
+                <div class="drone-propeller drone-propeller-2"></div>
+                <div class="drone-propeller drone-propeller-3"></div>
+                <div class="drone-propeller drone-propeller-4"></div>
+                <div class="drone-camera"></div>
+                <div class="drone-light"></div>
+            </div>
+            
+            <div class="agriculture-drone" id="agriculture-drone-2">
+                <div class="drone-body"></div>
+                <div class="drone-propeller drone-propeller-1"></div>
+                <div class="drone-propeller drone-propeller-2"></div>
+                <div class="drone-propeller drone-propeller-3"></div>
+                <div class="drone-propeller drone-propeller-4"></div>
+                <div class="drone-camera"></div>
+                <div class="drone-light"></div>
+            </div>
+
+            <!-- Farm Fields -->
+            <div class="farm-fields">
+                <div class="field-row" data-crop="corn"></div>
+                <div class="field-row" data-crop="wheat"></div>
+                <div class="field-row" data-crop="soy"></div>
+                <div class="field-row" data-crop="corn"></div>
+            </div>
+
+            <!-- IoT Sensors -->
+            <div class="iot-sensor" id="sensor-1">
+                <div class="sensor-body"></div>
+                <div class="sensor-antenna"></div>
+                <div class="sensor-signal"></div>
+                <div class="sensor-light"></div>
+            </div>
+            
+            <div class="iot-sensor" id="sensor-2">
+                <div class="sensor-body"></div>
+                <div class="sensor-antenna"></div>
+                <div class="sensor-signal"></div>
+                <div class="sensor-light"></div>
+            </div>
+
+            <!-- Irrigation System -->
+            <div class="irrigation-system">
+                <div class="irrigation-pipe"></div>
+                <div class="irrigation-sprinkler" id="sprinkler-1">
+                    <div class="sprinkler-head"></div>
+                    <div class="water-spray"></div>
+                </div>
+                <div class="irrigation-sprinkler" id="sprinkler-2">
+                    <div class="sprinkler-head"></div>
+                    <div class="water-spray"></div>
+                </div>
+            </div>
+
+            <!-- Data Visualization -->
+            <div class="data-visualization">
+                <div class="data-point" data-type="temperature"></div>
+                <div class="data-point" data-type="humidity"></div>
+                <div class="data-point" data-type="soil-moisture"></div>
+                <div class="data-connection"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="agriculture-header-content">
+                <h1 class="page-title" data-aos="fade-up">🌾 Agriculture & Natural Resource Services</h1>
+                <p class="page-subtitle" data-aos="fade-up" data-aos-delay="100">Smart Agriculture Integration with Precision Farming & Advanced Technology Solutions</p>
+                <nav class="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                    <a href="index.html">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="services.html">Services</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">Agriculture Services</span>
+                </nav>
+                <div class="header-stats">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+                        <span class="stat-number">15,000+</span>
+                        <span class="stat-label">Acres Monitored</span>
+                    </div>
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Yield Optimization</span>
+                    </div>
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="500">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Smart Monitoring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agriculture Services Grid -->
+    <section class="agriculture-services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">🌾 Agriculture & Natural Resource Services</h2>
+                <p class="section-subtitle">Comprehensive smart agriculture solutions with cutting-edge technology</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="service-title">🌱 Precision Agriculture Mapping</h3>
+                    <p class="service-description">Advanced field mapping with GPS precision for optimized crop management and yield maximization.</p>
+                    <ul class="service-features">
+                        <li>Variable rate application mapping</li>
+                        <li>Yield mapping and analysis</li>
+                        <li>Field boundary delineation</li>
+                        <li>Crop zoning optimization</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="service-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3 class="service-title">🛰 Remote Sensing for Crop Health Monitoring</h3>
+                    <p class="service-description">Satellite and drone-based monitoring for real-time crop health assessment and early problem detection.</p>
+                    <ul class="service-features">
+                        <li>NDVI vegetation index analysis</li>
+                        <li>Multispectral imaging</li>
+                        <li>Disease and pest detection</li>
+                        <li>Growth stage monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="service-title">🎯 Smart Agriculture Integration (GIS + IoT)</h3>
+                    <p class="service-description">Integrated IoT sensors with GIS mapping for comprehensive farm management and data-driven decisions.</p>
+                    <ul class="service-features">
+                        <li>Soil moisture sensors</li>
+                        <li>Weather station integration</li>
+                        <li>Real-time data analytics</li>
+                        <li>Automated alert systems</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="service-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3 class="service-title">💧 Irrigation Planning & Management</h3>
+                    <p class="service-description">Optimized irrigation systems design and water resource management for sustainable farming practices.</p>
+                    <ul class="service-features">
+                        <li>Water requirement analysis</li>
+                        <li>Irrigation system design</li>
+                        <li>Efficiency optimization</li>
+                        <li>Water conservation strategies</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-drone"></i>
+                    </div>
+                    <h3 class="service-title">🚁 Agricultural Drone Spraying & Spreading</h3>
+                    <p class="service-description">Precision drone applications for fertilizers, pesticides, and seeds with GPS-guided accuracy.</p>
+                    <ul class="service-features">
+                        <li>Precision spraying operations</li>
+                        <li>Seed spreading services</li>
+                        <li>Fertilizer application</li>
+                        <li>Pest control treatments</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="350">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="service-title">🛡 Enhanced Crop Protection</h3>
+                    <p class="service-description">Advanced monitoring and protection systems for crop security and yield preservation.</p>
+                    <ul class="service-features">
+                        <li>Early warning systems</li>
+                        <li>Pest and disease monitoring</li>
+                        <li>Weather risk assessment</li>
+                        <li>Crop insurance support</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3 class="service-title">🍎 Fruit Orchard Support & Yield Mapping</h3>
+                    <p class="service-description">Specialized services for orchard management including tree health monitoring and yield prediction.</p>
+                    <ul class="service-features">
+                        <li>Tree health assessment</li>
+                        <li>Yield prediction modeling</li>
+                        <li>Harvest optimization</li>
+                        <li>Quality control monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="450">
+                    <div class="service-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3 class="service-title">🌳 Afforestation & Reforestation Aid</h3>
+                    <p class="service-description">Supporting sustainable forestry practices with mapping and monitoring solutions for tree planting projects.</p>
+                    <ul class="service-features">
+                        <li>Site suitability analysis</li>
+                        <li>Planting pattern optimization</li>
+                        <li>Growth monitoring</li>
+                        <li>Carbon sequestration tracking</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="service-title">⏱ Time & Cost Efficiency in Farm Operations</h3>
+                    <p class="service-description">Optimization solutions to reduce operational costs and improve time efficiency in agricultural processes.</p>
+                    <ul class="service-features">
+                        <li>Operation workflow optimization</li>
+                        <li>Resource allocation planning</li>
+                        <li>Cost-benefit analysis</li>
+                        <li>Efficiency reporting</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="550">
+                    <div class="service-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="service-title">📄 Land Suitability & Soil Analysis</h3>
+                    <p class="service-description">Comprehensive soil testing and land assessment for optimal crop selection and soil management.</p>
+                    <ul class="service-features">
+                        <li>Soil composition analysis</li>
+                        <li>Nutrient level assessment</li>
+                        <li>pH and organic matter testing</li>
+                        <li>Crop suitability recommendations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Technology Showcase -->
+    <section class="technology-showcase">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-aos="zoom-in" data-aos-delay="100">Our Agricultural Technology</h2>
+                <p class="section-subtitle" data-aos="zoom-in" data-aos-delay="200">Cutting-edge tools for modern farming</p>
+            </div>
+
+            <div class="technology-grid">
+                <div class="technology-card" data-aos="flip-left" data-aos-delay="100" data-aos-duration="800">
+                    <div class="technology-icon" data-aos="zoom-in" data-aos-delay="300">
+                        <i class="fas fa-drone"></i>
+                    </div>
+                    <h3 class="technology-title" data-aos="fade-up" data-aos-delay="400">Agricultural Drones</h3>
+                    <p class="technology-description" data-aos="fade-up" data-aos-delay="500">Advanced UAVs equipped with multispectral cameras for comprehensive field mapping and monitoring.</p>
+                </div>
+
+                <div class="technology-card" data-aos="flip-left" data-aos-delay="200" data-aos-duration="800">
+                    <div class="technology-icon" data-aos="zoom-in" data-aos-delay="400">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3 class="technology-title" data-aos="fade-up" data-aos-delay="500">Satellite Imagery</h3>
+                    <p class="technology-description" data-aos="fade-up" data-aos-delay="600">High-resolution satellite data for large-scale field monitoring and historical analysis.</p>
+                </div>
+
+                <div class="technology-card" data-aos="flip-left" data-aos-delay="300" data-aos-duration="800">
+                    <div class="technology-icon" data-aos="zoom-in" data-aos-delay="500">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="technology-title" data-aos="fade-up" data-aos-delay="600">IoT Sensors</h3>
+                    <p class="technology-description" data-aos="fade-up" data-aos-delay="700">Field-deployed sensors for real-time monitoring of soil moisture, temperature, and other critical parameters.</p>
+                </div>
+
+                <div class="technology-card" data-aos="flip-left" data-aos-delay="400" data-aos-duration="800">
+                    <div class="technology-icon" data-aos="zoom-in" data-aos-delay="600">
+                        <i class="fas fa-tablet-alt"></i>
+                    </div>
+                    <h3 class="technology-title" data-aos="fade-up" data-aos-delay="700">Mobile Applications</h3>
+                    <p class="technology-description" data-aos="fade-up" data-aos-delay="800">Custom mobile apps for field data collection, monitoring, and management on the go.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="case-studies">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-aos="zoom-in" data-aos-delay="100">Success Stories</h2>
+                <p class="section-subtitle" data-aos="zoom-in" data-aos-delay="200">Real results from our agricultural solutions</p>
+            </div>
+
+            <div class="case-studies-slider" data-aos="fade-up" data-aos-delay="300">
+                <div class="case-study-item" data-aos="fade-right" data-aos-delay="400">
+                    <div class="case-study-image">
+                        <img src="/placeholder.svg?height=300&width=500&text=Corn+Farm+Case+Study" alt="Corn Farm Case Study" class="img-fluid">
+                    </div>
+                    <div class="case-study-content" data-aos="fade-up" data-aos-delay="500">
+                        <h3>Midwest Corn Farm</h3>
+                        <p>Implemented precision farming techniques that resulted in a 22% increase in yield and 15% reduction in input costs across 5,000 acres.</p>
+                        <div class="case-study-stats">
+                            <div class="stat">
+                                <span class="stat-number">22%</span>
+                                <span class="stat-label">Yield Increase</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">15%</span>
+                                <span class="stat-label">Cost Reduction</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-study-item" data-aos="fade-left" data-aos-delay="450">
+                    <div class="case-study-image">
+                        <img src="/placeholder.svg?height=300&width=500&text=Vineyard+Case+Study" alt="Vineyard Case Study" class="img-fluid">
+                    </div>
+                    <div class="case-study-content" data-aos="fade-up" data-aos-delay="550">
+                        <h3>California Vineyard</h3>
+                        <p>Deployed soil moisture sensors and irrigation management system that reduced water usage by 30% while improving grape quality and consistency.</p>
+                        <div class="case-study-stats">
+                            <div class="stat">
+                                <span class="stat-number">30%</span>
+                                <span class="stat-label">Water Savings</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">18%</span>
+                                <span class="stat-label">Quality Improvement</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-aos="zoom-in" data-aos-delay="100">Frequently Asked Questions</h2>
+                <p class="section-subtitle" data-aos="zoom-in" data-aos-delay="200">Common questions about our agricultural services</p>
+            </div>
+
+            <div class="faq-container" data-aos="fade-up" data-aos-delay="300">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="faq-question">
+                        <h3>What size farms can benefit from precision agriculture?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Farms of all sizes can benefit from precision agriculture. While larger operations may see more immediate ROI on certain technologies, we offer scalable solutions that can be tailored to small and medium-sized farms as well. Our team works with you to identify the most cost-effective solutions for your specific operation.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="faq-question">
+                        <h3>How often should soil analysis be performed?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For most crops and soil types, we recommend comprehensive soil analysis every 2-3 years, with targeted sampling in problem areas annually. However, this can vary based on crop rotation, soil type, and management practices. Our agronomists can help develop a customized soil sampling plan for your operation.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="faq-question">
+                        <h3>What types of crops can be monitored with your services?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our crop monitoring services can be applied to virtually any crop type, including row crops (corn, soybeans, wheat), specialty crops (fruits, vegetables), orchards, vineyards, and more. The specific technologies and methodologies may vary by crop type, but our fundamental approach works across all agricultural production systems.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="700">
+                    <div class="faq-question">
+                        <h3>How quickly can I see ROI from implementing precision agriculture?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Many clients see ROI within the first growing season, particularly with variable rate applications and irrigation management. More comprehensive systems may take 1-2 seasons to show full financial returns. We work with clients to prioritize implementations that will provide the quickest returns while building toward long-term sustainability and profitability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h2 class="cta-title" data-aos="zoom-in" data-aos-delay="100">Ready to Transform Your Farm?</h2>
+                <p class="cta-subtitle" data-aos="fade-up" data-aos-delay="200">Contact us today to discuss how our agricultural services can help optimize your operations</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary btn-large" data-aos="fade-right" data-aos-delay="300">
+                        <span>Schedule a Consultation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="tel:+15551234567" class="btn btn-secondary btn-large" data-aos="fade-left" data-aos-delay="400">
+                        <span>Call Us Now</span>
+                        <i class="fas fa-phone"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/placeholder.svg?height=50&width=120&text=TGIS+Logo" alt="TGIS Logo" class="logo">
+                        <p>Professional Geographical Information Solutions for modern businesses and agriculture.</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="survey-services.html">Survey Services</a></li>
+                        <li><a href="it-services.html">IT Solutions</a></li>
+                        <li><a href="real-estate.html">Real Estate Services</a></li>
+                        <li><a href="machine-rental.html">Machine Rental</a></li>
+                        <li><a href="agriculture-services.html">Agriculture</a></li>
+                        <li><a href="training-services.html">Training & Certificate</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="events.html">Events</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-envelope"></i> info@tgis.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Business Ave, City, State 12345</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 TGIS - The Geographical Information System. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="../js/script.js"></script>
+    <script src="../js/agriculture-services.js"></script>
+    <script src="../js/agriculture-services-animations.js"></script>
+    <script src="../js/agriculture-services-faq.js"></script>
+    <script src="../js/agriculture-services-contact.js"></script>
+    <script src="../js/agriculture-services-animations.js"></script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+</body>
+</html>

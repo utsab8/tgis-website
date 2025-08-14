@@ -1,0 +1,571 @@
+/* ===================================
+   COMPREHENSIVE RESPONSIVE ENHANCEMENTS
+   ================================== */
+
+/* Modern CSS Custom Properties for Responsive Design */
+:root {
+    /* Responsive Breakpoints */
+    --mobile-small: 320px;
+    --mobile: 480px;
+    --tablet-small: 576px;
+    --tablet: 768px;
+    --tablet-large: 992px;
+    --desktop: 1200px;
+    --desktop-large: 1400px;
+    
+    /* Responsive Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Responsive Typography */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+    --font-size-4xl: 2.5rem;
+    --font-size-5xl: 3rem;
+}
+
+/* ===================================
+   CONTAINER IMPROVEMENTS
+   ================================== */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Enhanced Container Responsive Behavior */
+@media (min-width: 576px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 0 2rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        padding: 0 2.5rem;
+    }
+}
+
+/* ===================================
+   ENHANCED NAVIGATION
+   ================================== */
+
+/* Mobile-First Navigation Improvements */
+@media (max-width: 991px) {
+    .navbar {
+        padding: 0.75rem 0;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 100%);
+        background: var(--white);
+        flex-direction: column;
+        padding: 2rem 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 9999;
+        overflow-y: auto;
+    }
+    
+    .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-list {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+    
+    .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .nav-link {
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+        background: var(--light-blue);
+        color: var(--dark-blue);
+        padding-left: 2.5rem;
+    }
+    
+    /* Enhanced Mobile Dropdown */
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: #f8f9fa;
+        margin: 0;
+        border-radius: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .dropdown:hover .dropdown-menu,
+    .dropdown.active .dropdown-menu {
+        max-height: 300px;
+    }
+    
+    .dropdown-link {
+        padding: 0.75rem 3rem;
+        font-size: 1rem;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    /* Improved Mobile Toggle */
+    .nav-toggle {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+        padding: 0.5rem;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+    }
+    
+    .nav-toggle:hover {
+        background: rgba(135, 206, 235, 0.1);
+    }
+    
+    .bar {
+        width: 25px;
+        height: 3px;
+        background: var(--text-color);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 2px;
+    }
+    
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+}
+
+/* ===================================
+   ENHANCED GRID SYSTEMS
+   ================================== */
+
+/* Responsive Grid Improvements */
+.services-grid,
+.features-grid,
+.portfolio-grid,
+.testimonials-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Breakpoint-Specific Grid Adjustments */
+@media (max-width: 575px) {
+    .services-grid,
+    .features-grid,
+    .portfolio-grid,
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .services-grid,
+    .features-grid,
+    .portfolio-grid,
+    .testimonials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .services-grid,
+    .features-grid,
+    .portfolio-grid,
+    .testimonials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+}
+
+/* ===================================
+   ENHANCED TYPOGRAPHY
+   ================================== */
+
+/* Fluid Typography */
+.hero-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.2;
+}
+
+.section-title {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    line-height: 1.3;
+}
+
+.section-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    line-height: 1.5;
+}
+
+/* Enhanced Text Readability */
+@media (max-width: 767px) {
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    p {
+        margin-bottom: 1.25rem;
+    }
+    
+    .btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+        min-height: 48px; /* Touch-friendly */
+    }
+}
+
+/* ===================================
+   ENHANCED CARDS AND COMPONENTS
+   ================================== */
+
+/* Responsive Card Improvements */
+.service-card,
+.portfolio-card,
+.testimonial-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 767px) {
+    .service-card,
+    .portfolio-card,
+    .testimonial-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .service-card:hover,
+    .portfolio-card:hover,
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+    }
+}
+
+@media (min-width: 768px) {
+    .service-card:hover,
+    .portfolio-card:hover,
+    .testimonial-card:hover {
+        transform: translateY(-10px);
+    }
+}
+
+/* ===================================
+   ENHANCED FORMS
+   ================================== */
+
+/* Touch-Friendly Form Elements */
+@media (max-width: 767px) {
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 1rem;
+        font-size: 16px; /* Prevents zoom on iOS */
+        min-height: 48px;
+        border-radius: 8px;
+    }
+    
+    .form-group label {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+    
+    .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+/* ===================================
+   ENHANCED HERO SECTIONS
+   ================================== */
+
+/* Responsive Hero Improvements */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+@media (max-width: 767px) {
+    .hero {
+        min-height: 80vh;
+        padding: 2rem 0;
+    }
+    
+    .hero-content {
+        text-align: center;
+        padding: 0 1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}
+
+/* ===================================
+   ENHANCED FOOTER
+   ================================== */
+
+/* Simplified Footer Responsive Design */
+@media (max-width: 767px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-section {
+        padding: 1.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .footer-section:last-child {
+        border-bottom: none;
+    }
+    
+    .social-links {
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .footer-content {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* ===================================
+   ENHANCED UTILITIES
+   ================================== */
+
+/* Responsive Spacing Utilities */
+.mb-responsive {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .mb-responsive {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .mb-responsive {
+        margin-bottom: 3rem;
+    }
+}
+
+/* Responsive Text Alignment */
+.text-center-mobile {
+    text-align: left;
+}
+
+@media (max-width: 767px) {
+    .text-center-mobile {
+        text-align: center;
+    }
+}
+
+/* Hide/Show Elements Responsively */
+.hide-mobile {
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .hide-mobile {
+        display: none;
+    }
+}
+
+.show-mobile {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .show-mobile {
+        display: block;
+    }
+}
+
+/* ===================================
+   ENHANCED ANIMATIONS
+   ================================== */
+
+/* Reduced Motion Respect */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ===================================
+   ENHANCED ACCESSIBILITY
+   ================================== */
+
+/* Focus Improvements */
+@media (max-width: 767px) {
+    .btn:focus,
+    .nav-link:focus,
+    input:focus,
+    textarea:focus,
+    select:focus {
+        outline: 3px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .btn {
+        border: 2px solid currentColor;
+    }
+    
+    .card {
+        border: 2px solid var(--text-color);
+    }
+}
+
+/* ===================================
+   PRINT STYLES
+   ================================== */
+
+@media print {
+    .navbar,
+    .floating-action-btn,
+    .back-to-top,
+    .hero-video,
+    .scroll-indicator,
+    .nav-toggle {
+        display: none !important;
+    }
+    
+    .hero {
+        height: auto;
+        padding: 2rem 0;
+        background: white;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: black;
+    }
+    
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    .section-title {
+        font-size: 18pt;
+        color: black;
+    }
+    
+    .hero-title {
+        font-size: 24pt;
+        color: black;
+    }
+}

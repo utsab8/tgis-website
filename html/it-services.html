@@ -1,0 +1,2292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Services - TGIS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Top Contact Bar */
+        .top-contact-bar {
+            background: #1a1a1a;
+            color: white;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .top-contact-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info span {
+            margin-right: 2rem;
+        }
+
+        .contact-info i {
+            margin-right: 0.5rem;
+            color: #667eea;
+        }
+
+        .social-links a {
+            color: white;
+            margin-left: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 40px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-link:hover,
+        .dropdown-link.active {
+            background: #f8f9fa;
+            color: #667eea;
+        }
+
+        .nav-cta {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .nav-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Video Styles */
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        
+        .hero-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .title-line {
+            display: block;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+        
+        .scroll-arrow {
+            animation: bounce 2s infinite;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: slideUp 1s ease-out 0.9s forwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Technologies Section */
+        .technologies {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-item:hover {
+            background: #f8f9fa;
+            transform: translateY(-5px);
+        }
+
+        .tech-item i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .tech-item h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #667eea;
+        }
+
+        .footer-logo p {
+            color: #ccc;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 1rem;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+        }
+
+        /* Floating Action Button */
+        .floating-action-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-action-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .fab-tooltip {
+            position: absolute;
+            right: 70px;
+            background: #333;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .floating-action-btn:hover .fab-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 50px;
+            height: 50px;
+            background: rgba(102, 126, 234, 0.9);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: rgba(102, 126, 234, 1);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .top-contact-bar {
+                display: none;
+            }
+
+            .navbar {
+                top: 0;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                transition: left 0.3s ease;
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: #f8f9fa;
+                margin-top: 0.5rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+
+            .floating-action-btn {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .back-to-top {
+                bottom: 1rem;
+                left: 1rem;
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+
+            .fab-tooltip {
+                display: none;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Advanced Particle System */
+        .particle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        #particle-canvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Floating Tech Icons */
+        .floating-tech-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .tech-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(102, 126, 234, 0.3);
+            animation: float-icon 8s infinite ease-in-out;
+        }
+
+        .tech-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .tech-icon:nth-child(2) { top: 40%; right: 15%; animation-delay: 1s; }
+        .tech-icon:nth-child(3) { top: 60%; left: 20%; animation-delay: 2s; }
+        .tech-icon:nth-child(4) { top: 30%; right: 30%; animation-delay: 3s; }
+        .tech-icon:nth-child(5) { top: 70%; left: 80%; animation-delay: 4s; }
+        .tech-icon:nth-child(6) { top: 15%; left: 70%; animation-delay: 5s; }
+        .tech-icon:nth-child(7) { top: 80%; right: 60%; animation-delay: 6s; }
+        .tech-icon:nth-child(8) { top: 50%; left: 5%; animation-delay: 7s; }
+
+        /*
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(90deg); }
+            50% { transform: translateY(10px) rotate(180deg); }
+            75% { transform: translateY(-15px) rotate(270deg); }
+        }
+        */
+
+        /* Geometric Shapes */
+        .geometric-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+        }
+
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            top: 10%;
+            left: 5%;
+            animation: rotate-shape 15s linear infinite;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            top: 70%;
+            right: 10%;
+            animation: rotate-shape 20s linear infinite reverse;
+            border-radius: 50%;
+        }
+
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            top: 30%;
+            left: 80%;
+            animation: float-shape 12s ease-in-out infinite;
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+        }
+
+        .shape-4 {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            top: 60%;
+            left: 15%;
+            animation: pulse-shape 8s ease-in-out infinite;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .shape-5 {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #ffecd2, #fcb69f);
+            top: 20%;
+            right: 20%;
+            animation: morph-shape 18s ease-in-out infinite;
+        }
+
+        @keyframes rotate-shape {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes float-shape {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-30px) translateX(20px); }
+            50% { transform: translateY(20px) translateX(-15px); }
+            75% { transform: translateY(-10px) translateX(25px); }
+        }
+
+        @keyframes pulse-shape {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.5); opacity: 0.3; }
+        }
+
+        @keyframes morph-shape {
+            0%, 100% { border-radius: 50%; transform: rotate(0deg); }
+            25% { border-radius: 25% 75%; transform: rotate(90deg); }
+            50% { border-radius: 75% 25%; transform: rotate(180deg); }
+            75% { border-radius: 25% 75% 75% 25%; transform: rotate(270deg); }
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        #matrix-canvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Glitch Effect for Title */
+        .glitch-effect {
+            position: relative;
+        }
+
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+
+        .glitch-effect::before {
+            animation: glitch-1 2s infinite;
+            color: #ff0000;
+        }
+
+        .glitch-effect::after {
+            animation: glitch-2 2s infinite;
+            color: #00ffff;
+        }
+
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { opacity: 0; }
+            15%, 49% { opacity: 1; transform: translate(-2px, 2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 19%, 20%, 79%, 80%, 99%, 100% { opacity: 0; }
+            20%, 79% { opacity: 1; transform: translate(2px, -2px); }
+        }
+
+        /* Typewriter Effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid rgba(255, 255, 255, 0.75);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: rgba(255, 255, 255, 0.75); }
+        }
+
+        /* Neon Glow Effect */
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+            animation: neon-pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes neon-pulse {
+            from { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            to { box-shadow: 0 0 30px rgba(102, 126, 234, 0.8), 0 0 40px rgba(102, 126, 234, 0.6); }
+        }
+
+        /* Hologram Effect */
+        .hologram {
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            background-size: 200% 200%;
+            animation: hologram-shine 2s ease-in-out infinite;
+        }
+
+        @keyframes hologram-shine {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        /* Pulse Glow for Scroll Indicator */
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { 
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(102, 126, 234, 0.6);
+                transform: scale(1.1);
+            }
+        }
+
+        /* Terminal Code Stream */
+        .terminal-stream {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .terminal-window {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            font-family: 'Courier New', monospace;
+            animation: terminal-float 20s infinite ease-in-out;
+        }
+        
+        .terminal-1 {
+            width: 400px;
+            height: 200px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .terminal-2 {
+            width: 350px;
+            height: 180px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 10s;
+        }
+        
+        .terminal-header {
+            background: linear-gradient(90deg, #1a1a1a, #2a2a2a);
+            padding: 8px 12px;
+            border-bottom: 1px solid #00ff00;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .terminal-buttons {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .terminal-buttons span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: block;
+        }
+        
+        .btn-close { background: #ff5f56; }
+        .btn-minimize { background: #ffbd2e; }
+        .btn-maximize { background: #27ca3f; }
+        
+        .terminal-title {
+            color: #00ff00;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .terminal-body {
+            padding: 12px;
+            color: #00ff00;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        
+        .code-line {
+            opacity: 0;
+            animation: type-line 2s forwards;
+        }
+        
+        .code-line:nth-child(1) { animation-delay: 1s; }
+        .code-line:nth-child(2) { animation-delay: 3s; }
+        .code-line:nth-child(3) { animation-delay: 5s; }
+        .code-line:nth-child(4) { animation-delay: 7s; }
+        .code-line:nth-child(5) { animation-delay: 9s; }
+        
+        @keyframes terminal-float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(10px) translateX(-5px); }
+            75% { transform: translateY(-15px) translateX(15px); }
+        }
+        
+        @keyframes type-line {
+            0% { opacity: 0; width: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 1; width: 100%; }
+        }
+        
+        /* Hacking Code Rain */
+        .hacking-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.6;
+        }
+        
+        #hacking-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Cyberpunk Grid */
+        .cyberpunk-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        
+        .grid-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
+        }
+        
+        .grid-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(0, 255, 255, 0.3) 1px, transparent 1px);
+            background-size: 25px 25px;
+            animation: grid-pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        @keyframes grid-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        /* Binary Stream */
+        .binary-stream {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .binary-column {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(0, 255, 0, 0.8) 50%, 
+                transparent 100%);
+            animation: binary-fall 8s linear infinite;
+        }
+        
+        .binary-column:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .binary-column:nth-child(2) { left: 40%; animation-delay: 2s; }
+        .binary-column:nth-child(3) { left: 60%; animation-delay: 4s; }
+        .binary-column:nth-child(4) { left: 80%; animation-delay: 6s; }
+        .binary-column:nth-child(5) { left: 90%; animation-delay: 1s; }
+        
+        .binary-column::before {
+            content: '01010101010101010101010101010101010101010101';
+            position: absolute;
+            top: -100%;
+            left: -10px;
+            width: 20px;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 8px;
+            line-height: 10px;
+            word-wrap: break-word;
+            animation: binary-text 8s linear infinite;
+        }
+        
+        @keyframes binary-fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        @keyframes binary-text {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        /* Floating Code Snippets */
+        .floating-code {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .code-snippet {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            animation: code-float 15s infinite ease-in-out;
+        }
+        
+        .snippet-1 {
+            top: 25%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .snippet-2 {
+            top: 50%;
+            right: 15%;
+            animation-delay: 5s;
+        }
+        
+        .snippet-3 {
+            top: 75%;
+            left: 70%;
+            animation-delay: 10s;
+        }
+        
+        .code-keyword { color: #ff6b6b; }
+        .code-function { color: #4ecdc4; }
+        .code-string { color: #45b7d1; }
+        .code-variable { color: #96ceb4; }
+        .code-number { color: #feca57; }
+        
+        @keyframes code-float {
+            0%, 100% { 
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            25% { 
+                transform: translateY(-30px) translateX(20px) rotate(2deg);
+                opacity: 1;
+            }
+            50% { 
+                transform: translateY(15px) translateX(-10px) rotate(-1deg);
+                opacity: 0.8;
+            }
+            75% { 
+                transform: translateY(-20px) translateX(30px) rotate(1deg);
+                opacity: 0.9;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Top Contact Bar -->
+    <div class="top-contact-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> +1 (555) 123-4567</span>
+                <span><i class="fas fa-envelope"></i> info@tgis.com</span>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="/placeholder.svg?height=50&width=120&text=TGIS+Logo" alt="TGIS Logo" class="logo">
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="services.html" class="dropdown-link">All Services</a>
+                            <a href="survey-services.html" class="dropdown-link">Survey Services</a>
+                            <a href="it-services.html" class="dropdown-link active">IT Solutions</a>
+                            <a href="real-estate-services.html" class="dropdown-link">Real Estate Services</a>
+                            <a href="machine-rental.html" class="dropdown-link">Machine Rental</a>
+                            <a href="agriculture-services.html" class="dropdown-link">Agriculture</a>
+                            <a href="civil-architecture-services.html" class="dropdown-link">Civil & Architecture</a>
+                            <a href="training-services.html" class="dropdown-link">Training & Certificate</a>
+                            <a href="blog.html" class="dropdown-link">Blog</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="portfolio.html" class="nav-link">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="careers.html" class="nav-link">Careers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="events.html" class="nav-link">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                <a href="#quote" class="btn btn-primary nav-cta">Get Quote</a>
+            </div>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Background Video -->
+        <div class="hero-video">
+            <video autoplay muted loop playsinline>
+                <source src="1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
+        <!-- Terminal Code Stream -->
+        <div class="terminal-stream">
+            <div class="terminal-window terminal-1">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn-close"></span>
+                        <span class="btn-minimize"></span>
+                        <span class="btn-maximize"></span>
+                    </div>
+                    <div class="terminal-title">root@tgis-server:~$</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="code-line">$ sudo apt update && apt upgrade -y</div>
+                    <div class="code-line">$ docker-compose up -d --scale web=3</div>
+                    <div class="code-line">$ kubectl apply -f deployment.yaml</div>
+                    <div class="code-line">$ npm run build:production</div>
+                    <div class="code-line">$ git push origin main</div>
+                </div>
+            </div>
+            
+            <div class="terminal-window terminal-2">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn-close"></span>
+                        <span class="btn-minimize"></span>
+                        <span class="btn-maximize"></span>
+                    </div>
+                    <div class="terminal-title">monitoring@tgis:~$</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="code-line">$ htop -p $(pgrep -d',' nginx)</div>
+                    <div class="code-line">$ tail -f /var/log/nginx/access.log</div>
+                    <div class="code-line">$ systemctl status postgresql</div>
+                    <div class="code-line">$ netstat -tulpn | grep :80</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hacking Code Rain -->
+        <div class="hacking-rain">
+            <canvas id="hacking-canvas"></canvas>
+        </div>
+        
+        <!-- Cyberpunk Grid -->
+        <div class="cyberpunk-grid">
+            <div class="grid-lines"></div>
+            <div class="grid-dots"></div>
+        </div>
+        
+        <!-- Binary Stream -->
+        <div class="binary-stream">
+            <div class="binary-column" data-speed="1"></div>
+            <div class="binary-column" data-speed="1.5"></div>
+            <div class="binary-column" data-speed="0.8"></div>
+            <div class="binary-column" data-speed="1.2"></div>
+            <div class="binary-column" data-speed="0.6"></div>
+        </div>
+        
+        <!-- Floating Code Snippets -->
+        <div class="floating-code">
+            <div class="code-snippet snippet-1">
+                <span class="code-keyword">function</span> <span class="code-function">deployApp</span>() {
+                <br>&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">'success'</span>;
+                <br>}
+            </div>
+            <div class="code-snippet snippet-2">
+                <span class="code-keyword">const</span> <span class="code-variable">server</span> = <span class="code-keyword">new</span> <span class="code-function">Express</span>();
+                <br><span class="code-variable">server</span>.<span class="code-function">listen</span>(<span class="code-number">3000</span>);
+            </div>
+            <div class="code-snippet snippet-3">
+                <span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> users
+                <br><span class="code-keyword">WHERE</span> active = <span class="code-number">1</span>;
+            </div>
+        </div>
+        
+        <!-- Advanced Particle System -->
+        <div class="particle-container">
+            <canvas id="particle-canvas"></canvas>
+        </div>
+        
+        <!-- Floating Tech Icons -->
+        <div class="floating-tech-icons">
+            <div class="tech-icon" data-speed="0.5"><i class="fab fa-react"></i></div>
+            <div class="tech-icon" data-speed="0.8"><i class="fab fa-node-js"></i></div>
+            <div class="tech-icon" data-speed="0.3"><i class="fab fa-python"></i></div>
+            <div class="tech-icon" data-speed="0.6"><i class="fab fa-aws"></i></div>
+            <div class="tech-icon" data-speed="0.4"><i class="fab fa-docker"></i></div>
+            <div class="tech-icon" data-speed="0.7"><i class="fas fa-database"></i></div>
+            <div class="tech-icon" data-speed="0.5"><i class="fas fa-cloud"></i></div>
+            <div class="tech-icon" data-speed="0.9"><i class="fas fa-shield-alt"></i></div>
+        </div>
+        
+        <!-- Geometric Shapes -->
+        <div class="geometric-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+        
+        <!-- Matrix Rain Effect -->
+        <div class="matrix-rain">
+            <canvas id="matrix-canvas"></canvas>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-text">
+                    <h1 class="hero-title glitch-effect">
+                        <span class="title-line" data-text="IT Solutions &">IT Solutions &</span>
+                        <span class="title-line" data-text="Services">Services</span>
+                    </h1>
+                    <p class="hero-subtitle typewriter">Empowering your business with cutting-edge technology solutions and expert IT services</p>
+                    <div class="hero-buttons">
+                        <a href="#services" class="btn btn-primary btn-large neon-glow">
+                            <span>Explore Our Services</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary btn-large hologram">
+                            <span>Get Consultation</span>
+                            <i class="fas fa-phone"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow pulse-glow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our IT Services</h2>
+                <p>Comprehensive technology solutions designed to drive your business forward</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Scalable cloud infrastructure and migration services to modernize your business operations.</p>
+                    <ul class="service-features">
+                        <li>Cloud Migration</li>
+                        <li>Infrastructure as a Service</li>
+                        <li>Cloud Security</li>
+                        <li>Backup & Recovery</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Cybersecurity</h3>
+                    <p>Comprehensive security solutions to protect your digital assets and sensitive data.</p>
+                    <ul class="service-features">
+                        <li>Security Audits</li>
+                        <li>Threat Detection</li>
+                        <li>Firewall Management</li>
+                        <li>Security Training</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Software Development</h3>
+                    <p>Custom software solutions tailored to your specific business requirements and goals.</p>
+                    <ul class="service-features">
+                        <li>Web Applications</li>
+                        <li>Mobile Apps</li>
+                        <li>API Development</li>
+                        <li>System Integration</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Network Infrastructure</h3>
+                    <p>Robust network solutions to ensure reliable connectivity and optimal performance.</p>
+                    <ul class="service-features">
+                        <li>Network Design</li>
+                        <li>Installation & Setup</li>
+                        <li>Monitoring & Maintenance</li>
+                        <li>Performance Optimization</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>IT Support</h3>
+                    <p>24/7 technical support and maintenance to keep your systems running smoothly.</p>
+                    <ul class="service-features">
+                        <li>Help Desk Support</li>
+                        <li>Remote Assistance</li>
+                        <li>System Maintenance</li>
+                        <li>Hardware Support</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data Management</h3>
+                    <p>Efficient data storage, backup, and analytics solutions for informed decision-making.</p>
+                    <ul class="service-features">
+                        <li>Database Design</li>
+                        <li>Data Analytics</li>
+                        <li>Backup Solutions</li>
+                        <li>Data Recovery</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section class="technologies">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Technologies We Use</h2>
+                <p>Leveraging the latest technologies to deliver exceptional results</p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-item fade-in">
+                    <i class="fab fa-aws"></i>
+                    <h4>Amazon Web Services</h4>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-microsoft"></i>
+                    <h4>Microsoft Azure</h4>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-google"></i>
+                    <h4>Google Cloud</h4>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-docker"></i>
+                    <h4>Docker</h4>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-python"></i>
+                    <h4>Python</h4>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-js-square"></i>
+                    <h4>JavaScript</h4>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-react"></i>
+                    <h4>React</h4>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-node-js"></i>
+                    <h4>Node.js</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Let's discuss how our IT solutions can help you achieve your goals</p>
+            <a href="contact.html" class="contact-button">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/placeholder.svg?height=50&width=120&text=TGIS+Logo" alt="TGIS Logo" class="logo">
+                        <p>Professional Geographical Information Solutions for modern businesses.</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="survey-services.html">Survey Services</a></li>
+                        <li><a href="it-services.html">IT Solutions</a></li>
+                        <li><a href="real-estate-services.html">Real Estate Services</a></li>
+                        <li><a href="machine-rental.html">Machine Rental</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="events.html">Events</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-envelope"></i> info@tgis.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Business Ave, City, State 12345</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 TGIS - The Geographical Information System. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="floating-action-btn" id="floating-btn">
+        <i class="fas fa-comments"></i>
+        <span class="fab-tooltip">Chat with us</span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                setTimeout(() => {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }, 1000);
+            }
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        /*
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        */
+
+        /*
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+        */
+
+        // Particle Animation
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 5 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            
+            const particlesContainer = document.getElementById('particles');
+            if (particlesContainer) {
+                particlesContainer.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 6000);
+            }
+        }
+
+        /*
+        // Create particles periodically
+        setInterval(createParticle, 300);
+        */
+
+        // Service Card Hover Effects
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Mobile Menu Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                
+                // Animate hamburger menu
+                const bars = navToggle.querySelectorAll('.bar');
+                bars.forEach((bar, index) => {
+                    if (navMenu.classList.contains('active')) {
+                        if (index === 0) bar.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        if (index === 1) bar.style.opacity = '0';
+                        if (index === 2) bar.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                    } else {
+                        bar.style.transform = 'none';
+                        bar.style.opacity = '1';
+                    }
+                });
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    const bars = navToggle.querySelectorAll('.bar');
+                    bars.forEach(bar => {
+                        bar.style.transform = 'none';
+                        bar.style.opacity = '1';
+                    });
+                }
+            });
+        });
+
+        /*
+        // Parallax Effect for Hero Section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+        */
+
+        // Counter Animation for Service Cards
+        function animateCounters() {
+            const counters = document.querySelectorAll('.service-card');
+            counters.forEach((counter, index) => {
+                setTimeout(() => {
+                    counter.style.opacity = '0';
+                    counter.style.transform = 'translateY(30px)';
+                    
+                    setTimeout(() => {
+                        counter.style.transition = 'all 0.6s ease';
+                        counter.style.opacity = '1';
+                        counter.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        }
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                if (backToTopBtn) backToTopBtn.classList.add('visible');
+            } else {
+                if (backToTopBtn) backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // Floating Action Button
+        const floatingBtn = document.getElementById('floating-btn');
+        if (floatingBtn) {
+            floatingBtn.addEventListener('click', function() {
+                // Add your chat functionality here
+                alert('Chat functionality coming soon!');
+            });
+        }
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(animateCounters, 2000);
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.cta-button, .contact-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+    <script>
+        // Advanced Particle System
+        class ParticleSystem {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.particles = [];
+                this.resize();
+                this.init();
+                this.animate();
+                
+                window.addEventListener('resize', () => this.resize());
+            }
+            
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+            
+            init() {
+                for (let i = 0; i < 100; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        vx: (Math.random() - 0.5) * 2,
+                        vy: (Math.random() - 0.5) * 2,
+                        size: Math.random() * 3 + 1,
+                        opacity: Math.random() * 0.5 + 0.2,
+                        hue: Math.random() * 60 + 200
+                    });
+                }
+            }
+            
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.particles.forEach((particle, index) => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `hsla(${particle.hue}, 70%, 60%, ${particle.opacity})`;
+                    this.ctx.fill();
+                    
+                    // Connect nearby particles
+                    this.particles.forEach((otherParticle, otherIndex) => {
+                        if (index !== otherIndex) {
+                            const dx = particle.x - otherParticle.x;
+                            const dy = particle.y - otherParticle.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+                            
+                            if (distance < 100) {
+                                this.ctx.beginPath();
+                                this.ctx.moveTo(particle.x, particle.y);
+                                this.ctx.lineTo(otherParticle.x, otherParticle.y);
+                                this.ctx.strokeStyle = `hsla(${particle.hue}, 70%, 60%, ${0.1 * (1 - distance / 100)})`;
+                                this.ctx.stroke();
+                            }
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+        
+        // Matrix Rain Effect
+        class MatrixRain {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+                this.drops = [];
+                this.resize();
+                this.init();
+                this.animate();
+                
+                window.addEventListener('resize', () => this.resize());
+            }
+            
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+                this.fontSize = 14;
+                this.columns = this.canvas.width / this.fontSize;
+                this.init();
+            }
+            
+            init() {
+                this.drops = [];
+                for (let i = 0; i < this.columns; i++) {
+                    this.drops[i] = Math.random() * this.canvas.height;
+                }
+            }
+            
+            animate() {
+                this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.ctx.fillStyle = '#0f3460';
+                this.ctx.font = this.fontSize + 'px monospace';
+                
+                for (let i = 0; i < this.drops.length; i++) {
+                    const text = this.chars[Math.floor(Math.random() * this.chars.length)];
+                    this.ctx.fillText(text, i * this.fontSize, this.drops[i]);
+                    
+                    if (this.drops[i] > this.canvas.height && Math.random() > 0.975) {
+                        this.drops[i] = 0;
+                    }
+                    this.drops[i] += this.fontSize;
+                }
+                
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+        
+        // Hacking Code Rain Effect
+        function initHackingRain() {
+            const canvas = document.getElementById('hacking-canvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const hackingChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?/~`';
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+            
+            for (let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+            
+            function drawHackingRain() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#00ff00';
+                ctx.font = fontSize + 'px Courier New';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = hackingChars[Math.floor(Math.random() * hackingChars.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(drawHackingRain, 50);
+        }
+        
+        // Enhanced Glitch Effect
+        function enhanceGlitchEffect() {
+            const glitchElements = document.querySelectorAll('.glitch-effect');
+            
+            glitchElements.forEach(element => {
+                setInterval(() => {
+                    if (Math.random() > 0.95) {
+                        element.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
+                        element.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+                        
+                        setTimeout(() => {
+                            element.style.transform = 'translateX(0)';
+                            element.style.filter = 'none';
+                        }, 100);
+                    }
+                }, 100);
+            });
+        }
+        
+        // Terminal Typing Effect
+        function initTerminalTyping() {
+            const terminals = document.querySelectorAll('.terminal-window');
+            
+            terminals.forEach((terminal, index) => {
+                const lines = terminal.querySelectorAll('.code-line');
+                
+                lines.forEach((line, lineIndex) => {
+                    const text = line.textContent;
+                    line.textContent = '';
+                    
+                    setTimeout(() => {
+                        let charIndex = 0;
+                        const typeInterval = setInterval(() => {
+                            line.textContent += text[charIndex];
+                            charIndex++;
+                            
+                            if (charIndex >= text.length) {
+                                clearInterval(typeInterval);
+                            }
+                        }, 50);
+                    }, (index * 10000) + (lineIndex * 2000) + 1000);
+                });
+            });
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const particleCanvas = document.getElementById('particle-canvas');
+            const matrixCanvas = document.getElementById('matrix-canvas');
+            
+            /*
+            if (particleCanvas) new ParticleSystem(particleCanvas);
+            if (matrixCanvas) new MatrixRain(matrixCanvas);
+            
+            // Initialize all effects
+            initHackingRain();
+            enhanceGlitchEffect();
+            initTerminalTyping();
+            
+            // Restart terminal typing every 30 seconds
+            setInterval(initTerminalTyping, 30000);
+            */
+            
+            // Floating tech icons parallax
+            const techIcons = document.querySelectorAll('.tech-icon');
+            
+            document.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                techIcons.forEach(icon => {
+                    const speed = parseFloat(icon.dataset.speed);
+                    const x = (mouseX - 0.5) * speed * 50;
+                    const y = (mouseY - 0.5) * speed * 50;
+                    icon.style.transform = `translate(${x}px, ${y}px) rotate(${x * 0.5}deg)`;
+                });
+            });
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const canvas = document.getElementById('hacking-canvas');
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
+    </script>
+</body>
+</html>

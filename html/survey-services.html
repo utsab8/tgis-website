@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey & Mapping Services - TGIS</title>
+    <meta name="description" content="Comprehensive survey and mapping services including topographic, cadastral, aerial, and engineering surveys.">
+    
+    <!-- External Dependencies -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    
+    <!-- Add the missing CSS file for modal styles -->
+    <link rel="stylesheet" href="../css/survey-services-styles.css">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #87CEEB;
+            --dark-blue: #4682B4;
+            --light-blue: #E0F6FF;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-color: #333333;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 12px;
+            
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-info: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --gradient-dark: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            
+            --border-radius-sm: 0.375rem;
+            --border-radius-md: 0.5rem;
+            --border-radius-lg: 0.75rem;
+            --border-radius-xl: 1rem;
+            --border-radius-2xl: 1.5rem;
+            
+            --transition-fast: 0.15s ease-in-out;
+            --transition-normal: 0.3s ease-in-out;
+            --transition-slow: 0.5s ease-in-out;
+            --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background-color: var(--light-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+        }
+
+        .loader-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: loader-rotate 2s linear infinite;
+        }
+
+        .loader-line-wrap {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #fff;
+            animation: loader-spin 1.5s linear infinite;
+        }
+
+        .loader-line-wrap:nth-child(1) {
+            top: 0;
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .loader-line-wrap:nth-child(2) {
+            top: 0;
+            right: 0;
+            animation-delay: 0.3s;
+        }
+
+        .loader-line-wrap:nth-child(3) {
+            bottom: 0;
+            right: 0;
+            animation-delay: 0.6s;
+        }
+
+        .loader-line-wrap:nth-child(4) {
+            bottom: 0;
+            left: 0;
+            animation-delay: 0.9s;
+        }
+
+        .loader-line-wrap:nth-child(5) {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 1.2s;
+        }
+
+        @keyframes loader-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes loader-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            text-align: center;
+            color: white;
+        }
+
+        .loading-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .loading-text p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Top Contact Bar */
+        .top-contact-bar {
+            background: var(--dark-color);
+            color: white;
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .top-contact-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-contact-bar .contact-info {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .top-contact-bar .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .top-contact-bar .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .top-contact-bar .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top-contact-bar .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            top: 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-brand .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-xl);
+            padding: 1rem 0;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--gray-700);
+            text-decoration: none;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-link:hover,
+        .dropdown-link.active {
+            background: var(--gray-50);
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+        }
+
+        .nav-cta {
+            margin-left: 1rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .nav-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background: var(--gray-700);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        /* Survey Header */
+        .survey-header {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-top: 120px;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .survey-header .hero-content {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .hero-text {
+            text-align: center;
+            color: white;
+            max-width: 900px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .title-line {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-arrow {
+            color: white;
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius-lg);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Services Grid */
+        .services-section {
+            padding: 5rem 0;
+            background: var(--light-color);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--border-radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-service {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-service:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-large {
+            padding: 1.25rem 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo {
+            height: 50px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+            color: var(--primary-blue);
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-700);
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--primary-blue);
+        }
+
+        /* Floating Action Button */
+        .floating-action-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-xl);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .floating-action-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .fab-tooltip {
+            position: absolute;
+            right: 70px;
+            background: var(--gray-900);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-md);
+            font-size: 0.875rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .floating-action-btn:hover .fab-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.25rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .top-contact-bar {
+                display: none;
+            }
+
+            .navbar {
+                top: 0;
+            }
+
+            .survey-header {
+                margin-top: 80px;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: var(--transition);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+            }
+
+            .nav-item {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-link {
+                padding: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: var(--gray-50);
+                margin-top: 0;
+            }
+
+            .nav-cta {
+                margin: 2rem 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-toggle.active .bar:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .nav-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active .bar:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .survey-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .survey-header p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .survey-header h1 {
+                font-size: 2rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.75rem 1.5rem;
+            }
+
+            .btn-large {
+                padding: 1rem 2rem;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+
+            .floating-action-btn {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+            }
+
+            .back-to-top {
+                bottom: 1rem;
+                left: 1rem;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Communication Burst Animation */
+        @keyframes communicationBurst {
+            0% {
+                width: 10px;
+                height: 10px;
+                opacity: 1;
+            }
+            100% {
+                width: 100px;
+                height: 100px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="loading-text">
+            <h2>TGIS</h2>
+            <p>Loading Survey Services...</p>
+        </div>
+    </div>
+
+    <!-- Top Contact Bar -->
+    <div class="top-contact-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> +1 (555) 123-4567</span>
+                <span><i class="fas fa-envelope"></i> info@tgis.com</span>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="/placeholder.svg?height=50&width=120&text=TGIS+Logo" alt="TGIS Logo" class="logo">
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="services.html" class="dropdown-link">All Services</a>
+                            <a href="survey-services.html" class="dropdown-link active">Survey Services</a>
+                            <a href="it-services.html" class="dropdown-link">IT Solutions</a>
+                            <a href="real-estate-services.html" class="dropdown-link">Real Estate Services</a>
+                            <a href="machine-rental.html" class="dropdown-link">Machine Rental</a>
+                            <a href="agriculture-services.html" class="dropdown-link">Agriculture</a>
+                            <a href="civil-architecture-services.html" class="dropdown-link">Civil & Architecture</a>
+                            <a href="training-services.html" class="dropdown-link">Training & Certificate</a>
+                            <a href="blog.html" class="dropdown-link">Blog</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="portfolio.html" class="nav-link">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="careers.html" class="nav-link">Careers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="events.html" class="nav-link">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                <a href="#quote" class="btn btn-primary nav-cta">Get Quote</a>
+            </div>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Survey Header -->
+    <section class="survey-header" id="home">
+        <div class="hero-video">
+            <video autoplay muted loop playsinline>
+                <source src="1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-text" data-aos="fade-up">
+                    <h1 class="hero-title">
+                        <span class="title-line">Professional Survey &</span>
+                        <span class="title-line">Mapping Services</span>
+                    </h1>
+                    <p class="hero-subtitle">Comprehensive surveying solutions using cutting-edge technology for accurate and reliable results</p>
+                    <div class="hero-buttons">
+                        <a href="#services" class="btn btn-primary btn-large">
+                            <span>Explore Services</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary btn-large">
+                            <span>Get Quote</span>
+                            <i class="fas fa-phone"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Our Survey Services</h2>
+                <p class="section-subtitle">We provide comprehensive surveying and mapping solutions using the latest technology and industry best practices</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Topographical Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Topographical Survey</h3>
+                        <p class="service-description">Detailed mapping of land features, contours, and natural elements for development planning and engineering projects.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Cadastral Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-border-all"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Cadastral Survey</h3>
+                        <p class="service-description">Legal boundary surveys for property ownership, land registration, and legal documentation requirements.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- City / Urban Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">City / Urban Survey</h3>
+                        <p class="service-description">Comprehensive urban mapping for city planning, infrastructure development, and municipal projects.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Water Supply Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400" onclick="openModal('waterSupplyModal')">
+                    <div class="service-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Water Supply Survey</h3>
+                        <p class="service-description">Comprehensive water supply system surveys for pipeline mapping, water source identification, and distribution network planning.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- DGPS/GNSS Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="500" onclick="openModal('dgpsModal')">
+                    <div class="service-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">DGPS/GNSS Survey</h3>
+                        <p class="service-description">High-precision satellite-based positioning surveys using Differential GPS and Global Navigation Satellite Systems for accurate measurements.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- National Highway Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="600" onclick="openModal('highwayModal')">
+                    <div class="service-icon">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">National Highway Survey</h3>
+                        <p class="service-description">Specialized highway surveying for national road projects, including alignment surveys, cross-sections, and infrastructure mapping.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Bridge Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="700" onclick="openModal('bridgeModal')">
+                    <div class="service-icon">
+                        <i class="fas fa-bridge-water"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Bridge Survey</h3>
+                        <p class="service-description">Detailed bridge surveys for construction, maintenance, and structural assessment including foundation and approach surveys.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Layout Marketing Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="800" onclick="openModal('layoutModal')">
+                    <div class="service-icon">
+                        <i class="fas fa-drafting-compass"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Layout Marketing Survey</h3>
+                        <p class="service-description">Professional layout surveys for real estate development, plot demarcation, and marketing purposes with precise boundary marking.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Solar Power Plant Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="900" onclick="openModal('solarModal')">
+                    <div class="service-icon">
+                        <i class="fas fa-solar-panel"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Solar Power Plant Survey</h3>
+                        <p class="service-description">Specialized surveys for solar power installations including site assessment, panel layout planning, and shadow analysis.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- River Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="1000" onclick="openModal('riverModal')">
+                    <div class="service-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">River Survey</h3>
+                        <p class="service-description">Comprehensive river surveys including flow measurement, cross-sectional profiling, and flood plain mapping for water management projects.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Canal and Dam Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="1100" onclick="openModal('canalModal')">
+                    <div class="service-icon">
+                        <i class="fas fa-dam"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Canal and Dam Survey</h3>
+                        <p class="service-description">Specialized surveys for canal systems and dam structures including capacity assessment, structural monitoring, and safety evaluations.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Drone Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="1200" onclick="openModal('droneModal')">
+                    <div class="service-icon">
+                        <i class="fas fa-drone"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Drone Survey</h3>
+                        <p class="service-description">Advanced aerial surveys using unmanned aerial vehicles for rapid data collection, photogrammetry, and 3D mapping services.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Bathymetric Survey -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="1300" onclick="openModal('bathymetricModal')">
+                    <div class="service-icon">
+                        <i class="fas fa-anchor"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Bathymetric Survey</h3>
+                        <p class="service-description">Underwater depth measurement and seabed mapping for marine construction, dredging projects, and hydrographic studies.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Cartography -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="1400">
+                    <div class="service-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Map Reading, Projection & Cartography</h3>
+                        <p class="service-description">Professional cartography services including map reading, projection systems, and custom map creation.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Accuracy Testing -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="1500">
+                    <div class="service-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Accuracy Testing & Error Adjustment</h3>
+                        <p class="service-description">Comprehensive accuracy testing and error adjustment services to ensure survey precision and reliability.</p>
+                        <a href="#contact" class="btn-service">Get Quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
+        <!-- Water Supply Survey Modal -->
+        <div id="waterSupplyModal" class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2><i class="fas fa-tint"></i> Water Supply Survey</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Overview</h3>
+                    <p>Our comprehensive water supply survey services provide detailed mapping and analysis of water distribution systems, ensuring efficient and reliable water supply infrastructure.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Services Included</h3>
+                    <ul>
+                        <li>Pipeline route mapping and surveying</li>
+                        <li>Water source identification and assessment</li>
+                        <li>Distribution network planning</li>
+                        <li>Pressure zone analysis</li>
+                        <li>Leak detection surveys</li>
+                        <li>Water quality monitoring points mapping</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Applications</h3>
+                    <ul>
+                        <li>Municipal water supply systems</li>
+                        <li>Industrial water distribution</li>
+                        <li>Rural water supply projects</li>
+                        <li>Water treatment plant connections</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Technology Used</h3>
+                    <ul>
+                        <li>GPS/GNSS positioning systems</li>
+                        <li>Ground penetrating radar</li>
+                        <li>Digital mapping software</li>
+                        <li>Flow measurement equipment</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Get Quote</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- DGPS/GNSS Survey Modal -->
+        <div id="dgpsModal" class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2><i class="fas fa-satellite"></i> DGPS/GNSS Survey</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Overview</h3>
+                    <p>High-precision satellite-based positioning surveys using Differential GPS and Global Navigation Satellite Systems for centimeter-level accuracy in all surveying applications.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Services Included</h3>
+                    <ul>
+                        <li>Real-time kinematic (RTK) positioning</li>
+                        <li>Static GPS observations</li>
+                        <li>Network RTK surveys</li>
+                        <li>Post-processed kinematic (PPK) surveys</li>
+                        <li>Control point establishment</li>
+                        <li>Coordinate system transformations</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Accuracy Levels</h3>
+                    <ul>
+                        <li>Horizontal accuracy: ±1-3 cm</li>
+                        <li>Vertical accuracy: ±2-5 cm</li>
+                        <li>Real-time positioning capability</li>
+                        <li>Multi-constellation support (GPS, GLONASS, Galileo, BeiDou)</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Applications</h3>
+                    <ul>
+                        <li>Boundary surveys</li>
+                        <li>Construction layout</li>
+                        <li>Infrastructure mapping</li>
+                        <li>Geodetic control networks</li>
+                        <li>Mining and quarry surveys</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Get Quote</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- National Highway Survey Modal -->
+        <div id="highwayModal" class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2><i class="fas fa-road"></i> National Highway Survey</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Overview</h3>
+                    <p>Specialized highway surveying services for national road projects, ensuring precise alignment, proper drainage, and safe infrastructure development according to national standards.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Services Included</h3>
+                    <ul>
+                        <li>Route alignment surveys</li>
+                        <li>Cross-sectional profiling</li>
+                        <li>Longitudinal profiling</li>
+                        <li>Right-of-way surveys</li>
+                        <li>Drainage system mapping</li>
+                        <li>Bridge and culvert location surveys</li>
+                        <li>Traffic impact assessments</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Standards Compliance</h3>
+                    <ul>
+                        <li>IRC (Indian Roads Congress) standards</li>
+                        <li>MORTH specifications</li>
+                        <li>Environmental clearance surveys</li>
+                        <li>Land acquisition surveys</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Deliverables</h3>
+                    <ul>
+                        <li>Detailed project reports</li>
+                        <li>CAD drawings and plans</li>
+                        <li>Digital terrain models</li>
+                        <li>Quantity calculations</li>
+                        <li>Cost estimates</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Get Quote</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- Bridge Survey Modal -->
+        <div id="bridgeModal" class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2><i class="fas fa-bridge-water"></i> Bridge Survey</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Overview</h3>
+                    <p>Comprehensive bridge surveys for construction, maintenance, and structural assessment including foundation surveys, approach roads, and safety evaluations.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Services Included</h3>
+                    <ul>
+                        <li>Foundation surveys and soil investigation</li>
+                        <li>Approach road alignment</li>
+                        <li>Structural condition assessment</li>
+                        <li>Load capacity evaluations</li>
+                        <li>Underwater foundation surveys</li>
+                        <li>Bridge deck and superstructure mapping</li>
+                        <li>Safety barrier and railing surveys</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Bridge Types</h3>
+                    <ul>
+                        <li>Concrete bridges</li>
+                        <li>Steel bridges</li>
+                        <li>Suspension bridges</li>
+                        <li>Cable-stayed bridges</li>
+                        <li>Arch bridges</li>
+                        <li>Pedestrian bridges</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Technology Used</h3>
+                    <ul>
+                        <li>3D laser scanning</li>
+                        <li>Underwater sonar systems</li>
+                        <li>Structural health monitoring</li>
+                        <li>Non-destructive testing equipment</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Get Quote</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- Layout Marketing Survey Modal -->
+        <div id="layoutModal" class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2><i class="fas fa-drafting-compass"></i> Layout Marketing Survey</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Overview</h3>
+                    <p>Professional layout surveys for real estate development, plot demarcation, and marketing purposes with precise boundary marking and legal documentation.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Services Included</h3>
+                    <ul>
+                        <li>Plot boundary demarcation</li>
+                        <li>Layout planning and design</li>
+                        <li>Road and infrastructure layout</li>
+                        <li>Utility corridor planning</li>
+                        <li>Open space allocation</li>
+                        <li>Marketing material preparation</li>
+                        <li>Legal documentation support</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Project Types</h3>
+                    <ul>
+                        <li>Residential layouts</li>
+                        <li>Commercial complexes</li>
+                        <li>Industrial parks</li>
+                        <li>Gated communities</li>
+                        <li>Apartment complexes</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Deliverables</h3>
+                    <ul>
+                        <li>Layout plans and drawings</li>
+                        <li>Individual plot surveys</li>
+                        <li>Marketing brochures</li>
+                        <li>Legal compliance certificates</li>
+                        <li>3D visualization models</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Get Quote</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- Solar Power Plant Survey Modal -->
+        <div id="solarModal" class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2><i class="fas fa-solar-panel"></i> Solar Power Plant Survey</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Overview</h3>
+                    <p>Specialized surveys for solar power installations including comprehensive site assessment, optimal panel layout planning, and detailed shadow analysis for maximum energy efficiency.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Services Included</h3>
+                    <ul>
+                        <li>Site suitability assessment</li>
+                        <li>Solar panel layout optimization</li>
+                        <li>Shadow analysis and modeling</li>
+                        <li>Terrain modeling and grading</li>
+                        <li>Access road planning</li>
+                        <li>Electrical infrastructure layout</li>
+                        <li>Environmental impact assessment</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Analysis Parameters</h3>
+                    <ul>
+                        <li>Solar irradiation mapping</li>
+                        <li>Slope and aspect analysis</li>
+                        <li>Shading calculations</li>
+                        <li>Wind load assessments</li>
+                        <li>Soil bearing capacity</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Project Scales</h3>
+                    <ul>
+                        <li>Utility-scale solar farms</li>
+                        <li>Commercial rooftop installations</li>
+                        <li>Residential solar systems</li>
+                        <li>Floating solar projects</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Get Quote</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- River Survey Modal -->
+        <div id="riverModal" class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2><i class="fas fa-water"></i> River Survey</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Overview</h3>
+                    <p>Comprehensive river surveys including flow measurement, cross-sectional profiling, and flood plain mapping for effective water management and flood control projects.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Services Included</h3>
+                    <ul>
+                        <li>River cross-section surveys</li>
+                        <li>Flow velocity measurements</li>
+                        <li>Flood plain mapping</li>
+                        <li>Riverbank stability assessment</li>
+                        <li>Sediment transport analysis</li>
+                        <li>Water quality monitoring</li>
+                        <li>Hydraulic modeling</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Applications</h3>
+                    <ul>
+                        <li>Flood management projects</li>
+                        <li>River restoration</li>
+                        <li>Bridge construction planning</li>
+                        <li>Irrigation system design</li>
+                        <li>Environmental monitoring</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Technology Used</h3>
+                    <ul>
+                        <li>ADCP (Acoustic Doppler Current Profiler)</li>
+                        <li>Echo sounders</li>
+                        <li>Water level loggers</li>
+                        <li>GPS positioning systems</li>
+                        <li>Hydrographic software</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Get Quote</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- Canal and Dam Survey Modal -->
+        <div id="canalModal" class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2><i class="fas fa-dam"></i> Canal and Dam Survey</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Overview</h3>
+                    <p>Specialized surveys for canal systems and dam structures including capacity assessment, structural monitoring, safety evaluations, and maintenance planning.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Services Included</h3>
+                    <ul>
+                        <li>Dam structural surveys</li>
+                        <li>Canal alignment and profiling</li>
+                        <li>Reservoir capacity calculations</li>
+                        <li>Spillway and outlet surveys</li>
+                        <li>Embankment stability analysis</li>
+                        <li>Seepage monitoring</li>
+                        <li>Safety inspection surveys</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Dam Types</h3>
+                    <ul>
+                        <li>Earth and rockfill dams</li>
+                        <li>Concrete gravity dams</li>
+                        <li>Arch dams</li>
+                        <li>Buttress dams</li>
+                        <li>Check dams</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Monitoring Systems</h3>
+                    <ul>
+                        <li>Deformation monitoring</li>
+                        <li>Piezometer installations</li>
+                        <li>Inclinometer surveys</li>
+                        <li>Settlement monitoring</li>
+                        <li>Water level measurements</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Get Quote</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- Drone Survey Modal -->
+        <div id="droneModal" class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2><i class="fas fa-drone"></i> Drone Survey</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Overview</h3>
+                    <p>Advanced aerial surveys using unmanned aerial vehicles for rapid data collection, high-resolution photogrammetry, and comprehensive 3D mapping services.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Services Included</h3>
+                    <ul>
+                        <li>Aerial photography and videography</li>
+                        <li>Photogrammetric mapping</li>
+                        <li>3D point cloud generation</li>
+                        <li>Digital elevation models (DEM)</li>
+                        <li>Orthomosaic creation</li>
+                        <li>Volume calculations</li>
+                        <li>Progress monitoring</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Applications</h3>
+                    <ul>
+                        <li>Construction site monitoring</li>
+                        <li>Mining and quarry surveys</li>
+                        <li>Agricultural mapping</li>
+                        <li>Infrastructure inspection</li>
+                        <li>Environmental monitoring</li>
+                        <li>Disaster assessment</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Equipment Used</h3>
+                    <ul>
+                        <li>High-resolution cameras</li>
+                        <li>LiDAR sensors</li>
+                        <li>Multispectral cameras</li>
+                        <li>Thermal imaging cameras</li>
+                        <li>RTK-enabled drones</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Get Quote</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- Bathymetric Survey Modal -->
+        <div id="bathymetricModal" class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2><i class="fas fa-anchor"></i> Bathymetric Survey</h2>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Overview</h3>
+                    <p>Underwater depth measurement and seabed mapping services for marine construction, dredging projects, hydrographic studies, and underwater infrastructure development.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Services Included</h3>
+                    <ul>
+                        <li>Seabed depth mapping</li>
+                        <li>Underwater topography</li>
+                        <li>Sediment analysis</li>
+                        <li>Underwater obstacle detection</li>
+                        <li>Harbor and port surveys</li>
+                        <li>Pipeline route surveys</li>
+                        <li>Dredging volume calculations</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Applications</h3>
+                    <ul>
+                        <li>Marine construction projects</li>
+                        <li>Port and harbor development</li>
+                        <li>Underwater cable laying</li>
+                        <li>Dredging operations</li>
+                        <li>Environmental studies</li>
+                        <li>Navigation chart updates</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Equipment Used</h3>
+                    <ul>
+                        <li>Multibeam echo sounders</li>
+                        <li>Single beam echo sounders</li>
+                        <li>Side scan sonar</li>
+                        <li>Sub-bottom profilers</li>
+                        <li>GPS positioning systems</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Get Quote</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Contact Us</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h2 class="cta-title">Ready to Start Your Survey Project?</h2>
+                <p class="cta-subtitle">Contact us today to discuss your surveying requirements and get a free consultation.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary btn-large" data-aos="fade-up" data-aos-delay="100">
+                        <span>Get Free Quote</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#" class="btn btn-secondary btn-large" data-aos="fade-up" data-aos-delay="200">
+                        <span>Contact Us</span>
+                        <i class="fas fa-phone"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/placeholder.svg?height=50&width=120&text=TGIS+Logo" alt="TGIS Logo" class="logo">
+                        <p>Professional Geographical Information Solutions for modern businesses.</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="survey-services.html">Survey Services</a></li>
+                        <li><a href="it-services.html">IT Solutions</a></li>
+                        <li><a href="real-estate.html">Real Estate Services</a></li>
+                        <li><a href="machine-rental.html">Machine Rental</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="events.html">Events</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-envelope"></i> info@tgis.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Business Ave, City, State 12345</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 TGIS - The Geographical Information System. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="floating-action-btn" id="floating-btn">
+        <i class="fas fa-comments"></i>
+        <span class="fab-tooltip">Chat with us</span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- External Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Embedded JavaScript -->
+    <script>
+        // DOM Content Loaded - Moved to bottom of script
+
+        // Loading Screen
+        function initializeLoading() {
+            const loadingScreen = document.getElementById('loading-screen');
+            
+            if (!loadingScreen) {
+                console.log('Loading screen element not found, skipping loading screen functionality');
+                return;
+            }
+            
+            window.addEventListener('load', function() {
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }, 1500);
+            });
+        }
+
+        // Navigation
+        function initializeNavigation() {
+            const navbar = document.getElementById('navbar');
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Sticky navigation
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Mobile menu toggle
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navToggle.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    document.body.classList.toggle('nav-open');
+                });
+            }
+            
+            // Close mobile menu when clicking on links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navToggle && navMenu) {
+                        navToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        document.body.classList.remove('nav-open');
+                    }
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize Animations
+        function initializeAnimations() {
+            // Initialize AOS (Animate On Scroll)
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-in-out',
+                    once: true,
+                    mirror: false
+                });
+            }
+        }
+
+        // Scroll Effects
+        function initializeScrollEffects() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Advanced Animations
+        function initializeAdvancedAnimations() {
+            // Service card hover effects
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            serviceCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Button hover effects
+            const buttons = document.querySelectorAll('.btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Parallax effect for header
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('.survey-header');
+                if (header) {
+                    const rate = scrolled * -0.5;
+                    header.style.transform = `translateY(${rate}px)`;
+                }
+            });
+        }
+
+        // Communication burst effect
+        function createCommunicationBurst(element) {
+            const burst = document.createElement('div');
+            burst.className = 'communication-burst';
+            burst.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 10px;
+                height: 10px;
+                background: radial-gradient(circle, #3498db, transparent);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                animation: communicationBurst 2s ease-out forwards;
+                pointer-events: none;
+                z-index: 10;
+            `;
+            
+            element.appendChild(burst);
+            
+            setTimeout(() => {
+                burst.remove();
+            }, 2000);
+        }
+
+        // Add click effects to service icons
+        document.querySelectorAll('.service-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                createCommunicationBurst(this);
+            });
+        });
+
+        // Back to Top Button
+        function initializeBackToTop() {
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            if (!backToTopBtn) return;
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Floating Action Button
+        function initializeFloatingButton() {
+            const floatingBtn = document.getElementById('floating-btn');
+            
+            if (!floatingBtn) return;
+            
+            floatingBtn.addEventListener('click', function() {
+                // Add your chat functionality here
+                console.log('Chat button clicked');
+                // Example: Open chat widget, redirect to contact page, etc.
+            });
+        }
+
+        // Modal functionality
+        function openModal(modalId) {
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById(modalId);
+            
+            // Hide all modals first
+            const allModals = document.querySelectorAll('.modal-content');
+            allModals.forEach(m => m.style.display = 'none');
+            
+            // Show the selected modal
+            overlay.style.display = 'flex';
+            modal.style.display = 'block';
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+            
+            // Add animation
+            setTimeout(() => {
+                overlay.classList.add('active');
+                modal.classList.add('active');
+            }, 10);
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modalOverlay');
+            const allModals = document.querySelectorAll('.modal-content');
+            
+            // Remove animation classes
+            overlay.classList.remove('active');
+            allModals.forEach(modal => modal.classList.remove('active'));
+            
+            // Hide overlay after animation
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                allModals.forEach(modal => modal.style.display = 'none');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Initialize new components
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLoading();
+            initializeNavigation();
+            initializeAnimations();
+            initializeScrollEffects();
+            initializeAdvancedAnimations();
+            initializeBackToTop();
+            initializeFloatingButton();
+        });
+
+        // Error handling
+        window.addEventListener('error', function(e) {
+            console.log('Script error handled:', e.message);
+        });
+    </script>
+</body>
+</html>

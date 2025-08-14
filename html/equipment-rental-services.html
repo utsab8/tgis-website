@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment & Rental Services - TGIS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="equipment-rental-styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-tools"></i>
+            </div>
+            <div class="loading-text">Loading Equipment & Rental Services...</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-globe"></i> TGIS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="survey-services.html">Survey & Mapping</a></li>
+                            <li><a class="dropdown-item" href="inspection-monitoring-services.html">Inspection & Monitoring</a></li>
+                            <li><a class="dropdown-item" href="agriculture-services.html">Agriculture & Natural Resource</a></li>
+                            <li><a class="dropdown-item" href="environment-forestry-services.html">Environment & Forestry</a></li>
+                            <li><a class="dropdown-item" href="water-hydrology-services.html">Water & Hydrology</a></li>
+                            <li><a class="dropdown-item" href="civil-infrastructure-services.html">Civil & Infrastructure</a></li>
+                            <li><a class="dropdown-item" href="it-gis-services.html">IT & GIS Solutions</a></li>
+                            <li><a class="dropdown-item active" href="equipment-rental-services.html">Equipment & Rental</a></li>
+                            <li><a class="dropdown-item" href="training-services.html">Training & Capacity Building</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="equipment-hero">
+        <div class="hero-background">
+            <video autoplay muted loop class="hero-video">
+                <source src="assets/videos/equipment-background.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <!-- Advanced Equipment Animations -->
+        <div class="equipment-animations">
+            <!-- Survey Equipment -->
+            <div class="survey-equipment">
+                <div class="total-station">
+                    <div class="station-base"></div>
+                    <div class="station-telescope"></div>
+                    <div class="laser-beam"></div>
+                    <div class="measurement-display">
+                        <span class="angle">125°30'45"</span>
+                        <span class="distance">247.85m</span>
+                    </div>
+                </div>
+                <div class="gps-rover">
+                    <div class="rover-antenna"></div>
+                    <div class="rover-controller"></div>
+                    <div class="satellite-signals">
+                        <div class="signal"></div>
+                        <div class="signal"></div>
+                        <div class="signal"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Drone Fleet -->
+            <div class="drone-fleet">
+                <div class="drone mapping-drone">
+                    <div class="drone-body"></div>
+                    <div class="drone-propeller prop1"></div>
+                    <div class="drone-propeller prop2"></div>
+                    <div class="drone-propeller prop3"></div>
+                    <div class="drone-propeller prop4"></div>
+                    <div class="drone-camera"></div>
+                    <div class="flight-path"></div>
+                </div>
+                <div class="drone inspection-drone">
+                    <div class="drone-body"></div>
+                    <div class="drone-propeller prop1"></div>
+                    <div class="drone-propeller prop2"></div>
+                    <div class="drone-propeller prop3"></div>
+                    <div class="drone-propeller prop4"></div>
+                    <div class="thermal-camera"></div>
+                </div>
+            </div>
+            
+            <!-- Heavy Machinery -->
+            <div class="heavy-machinery">
+                <div class="excavator">
+                    <div class="excavator-base"></div>
+                    <div class="excavator-cabin"></div>
+                    <div class="excavator-arm"></div>
+                    <div class="excavator-bucket"></div>
+                    <div class="track-left"></div>
+                    <div class="track-right"></div>
+                </div>
+                <div class="crane">
+                    <div class="crane-base"></div>
+                    <div class="crane-mast"></div>
+                    <div class="crane-jib"></div>
+                    <div class="crane-hook"></div>
+                    <div class="crane-load"></div>
+                </div>
+            </div>
+            
+            <!-- Laboratory Equipment -->
+            <div class="laboratory-equipment">
+                <div class="microscope">
+                    <div class="microscope-base"></div>
+                    <div class="microscope-stage"></div>
+                    <div class="microscope-tube"></div>
+                    <div class="microscope-eyepiece"></div>
+                    <div class="sample-slide"></div>
+                </div>
+                <div class="spectrometer">
+                    <div class="spectrometer-body"></div>
+                    <div class="spectrometer-display"></div>
+                    <div class="spectrum-graph">
+                        <div class="spectrum-line"></div>
+                        <div class="spectrum-line"></div>
+                        <div class="spectrum-line"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testing Equipment -->
+            <div class="testing-equipment">
+                <div class="soil-tester">
+                    <div class="tester-probe"></div>
+                    <div class="tester-display"></div>
+                    <div class="ph-indicator"></div>
+                    <div class="moisture-meter"></div>
+                </div>
+                <div class="water-analyzer">
+                    <div class="analyzer-chamber"></div>
+                    <div class="analyzer-sensors">
+                        <div class="sensor"></div>
+                        <div class="sensor"></div>
+                        <div class="sensor"></div>
+                    </div>
+                    <div class="analysis-results">
+                        <div class="result-bar"></div>
+                        <div class="result-bar"></div>
+                        <div class="result-bar"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rental Status Board -->
+            <div class="rental-status">
+                <div class="status-board">
+                    <div class="board-header">Equipment Status</div>
+                    <div class="status-items">
+                        <div class="status-item available">
+                            <div class="status-indicator"></div>
+                            <span>Available: 15</span>
+                        </div>
+                        <div class="status-item rented">
+                            <div class="status-indicator"></div>
+                            <span>Rented: 8</span>
+                        </div>
+                        <div class="status-item maintenance">
+                            <div class="status-indicator"></div>
+                            <span>Maintenance: 2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-8">
+                    <div class="hero-content" data-aos="fade-up">
+                        <h1 class="hero-title">
+                            <i class="fas fa-tools"></i>
+                            Equipment & Rental Services
+                        </h1>
+                        <p class="hero-subtitle">
+                            Professional Equipment Rental for All Your Project Needs
+                        </p>
+                        <div class="hero-features">
+                            <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+                                <i class="fas fa-hammer"></i>
+                                <span>Heavy Machinery</span>
+                            </div>
+                            <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                                <i class="fas fa-microscope"></i>
+                                <span>Laboratory Equipment</span>
+                            </div>
+                            <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                                <i class="fas fa-drone"></i>
+                                <span>Survey Instruments</span>
+                            </div>
+                            <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                                <i class="fas fa-vial"></i>
+                                <span>Testing Equipment</span>
+                            </div>
+                        </div>
+                        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="500">
+                            <a href="#services" class="btn btn-primary btn-lg">
+                                <i class="fas fa-search"></i> Browse Equipment
+                            </a>
+                            <a href="#contact" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-phone"></i> Request Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="section-title" data-aos="fade-up">
+                        <i class="fas fa-cogs"></i> Our Equipment & Rental Services
+                    </h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                        Professional equipment rental with maintenance and support
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Survey Equipment Rental -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-compass"></i>
+                        </div>
+                        <h4>Survey Equipment Rental</h4>
+                        <p>Professional surveying instruments for accurate measurements and mapping projects.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Total Stations</li>
+                            <li><i class="fas fa-check"></i> GPS/GNSS Receivers</li>
+                            <li><i class="fas fa-check"></i> Theodolites & Levels</li>
+                            <li><i class="fas fa-check"></i> Laser Scanners</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Drone & UAV Rental -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-drone"></i>
+                        </div>
+                        <h4>Drone & UAV Rental</h4>
+                        <p>Advanced drones for aerial mapping, inspection, and monitoring applications.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Mapping Drones</li>
+                            <li><i class="fas fa-check"></i> Inspection Drones</li>
+                            <li><i class="fas fa-check"></i> Thermal Imaging Drones</li>
+                            <li><i class="fas fa-check"></i> LiDAR Drones</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Heavy Machinery Rental -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-hammer"></i>
+                        </div>
+                        <h4>Heavy Machinery Rental</h4>
+                        <p>Construction and earthmoving equipment for large-scale projects.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Excavators</li>
+                            <li><i class="fas fa-check"></i> Bulldozers</li>
+                            <li><i class="fas fa-check"></i> Cranes</li>
+                            <li><i class="fas fa-check"></i> Compactors</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Laboratory Equipment Rental -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h4>Laboratory Equipment Rental</h4>
+                        <p>Scientific instruments for research, testing, and analysis purposes.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Microscopes</li>
+                            <li><i class="fas fa-check"></i> Spectrometers</li>
+                            <li><i class="fas fa-check"></i> Centrifuges</li>
+                            <li><i class="fas fa-check"></i> pH Meters</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Testing Equipment Rental -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h4>Testing Equipment Rental</h4>
+                        <p>Specialized testing instruments for soil, water, and material analysis.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Soil Testing Kits</li>
+                            <li><i class="fas fa-check"></i> Water Quality Analyzers</li>
+                            <li><i class="fas fa-check"></i> Material Testing Equipment</li>
+                            <li><i class="fas fa-check"></i> Environmental Monitors</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- GIS Hardware Rental -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h4>GIS Hardware Rental</h4>
+                        <p>Computing equipment and accessories for GIS and mapping applications.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Field Computers</li>
+                            <li><i class="fas fa-check"></i> Tablets & Smartphones</li>
+                            <li><i class="fas fa-check"></i> Plotters & Printers</li>
+                            <li><i class="fas fa-check"></i> Data Loggers</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Maintenance & Support Services -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <h4>Maintenance & Support Services</h4>
+                        <p>Comprehensive maintenance and technical support for all equipment.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Preventive Maintenance</li>
+                            <li><i class="fas fa-check"></i> Repair Services</li>
+                            <li><i class="fas fa-check"></i> Calibration Services</li>
+                            <li><i class="fas fa-check"></i> Technical Support</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Equipment Training -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="800">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>Equipment Training</h4>
+                        <p>Professional training on equipment operation and safety procedures.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Operation Training</li>
+                            <li><i class="fas fa-check"></i> Safety Procedures</li>
+                            <li><i class="fas fa-check"></i> Maintenance Training</li>
+                            <li><i class="fas fa-check"></i> Certification Programs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Custom Equipment Solutions -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="900">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h4>Custom Equipment Solutions</h4>
+                        <p>Tailored equipment packages for specific project requirements.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Project Assessment</li>
+                            <li><i class="fas fa-check"></i> Equipment Selection</li>
+                            <li><i class="fas fa-check"></i> Package Deals</li>
+                            <li><i class="fas fa-check"></i> Long-term Rentals</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5><i class="fas fa-globe"></i> TGIS</h5>
+                    <p>Leading provider of professional equipment rental services for surveying, construction, and research projects.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6>Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6>Equipment Categories</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Survey Equipment</a></li>
+                        <li><a href="#">Heavy Machinery</a></li>
+                        <li><a href="#">Laboratory Equipment</a></li>
+                        <li><a href="#">Testing Equipment</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6>Contact Info</h6>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Kathmandu, Nepal</p>
+                        <p><i class="fas fa-phone"></i> +977-1-XXXXXXX</p>
+                        <p><i class="fas fa-envelope"></i> rental@tgis.com.np</p>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 TGIS. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Professional Equipment Solutions</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="equipment-rental-animations.js"></script>
+</body>
+</html>
